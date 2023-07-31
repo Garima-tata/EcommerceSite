@@ -1,0 +1,8 @@
+{% autoescape off %}
+
+<h1>Hi {{user.username}}</h1> 
+<p>please click to activate your account </p> 
+
+http://{{domain}}{% url 'activate' uidb64=uid token=token %}
+
+{% endautoescape %}

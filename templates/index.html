@@ -1,0 +1,220 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>BizLand Bootstrap Template - Index</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  <link href="{% static 'assets/img/favicon.png' %}" rel="icon">
+  <link href="{% static 'assets/img/apple-touch-icon.png' %}" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Roboto:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="{% static 'assets/vendor/aos/aos.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/bootstrap-icons/bootstrap-icons.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/boxicons/css/boxicons.min.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/glightbox/css/glightbox.min.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/swiper/swiper-bundle.min.css' %}" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link href="{% static 'assets/css/style.css' %}" rel="stylesheet">
+
+<style>
+    #hero {
+    width: 100%;
+    height: 75vh;
+    background: url(/static/assets/img/back.jpg) top left;
+    background-size: cover;
+    position: relative;
+}
+#hero:before {
+    content: "";
+    background: rgb(255 255 255 / 0%);
+    position: absolute;
+    bottom: 0;
+    top: 0;
+    left: 0;
+    right: 0;
+}
+#hero h1 {
+    margin: 0;
+    font-size: 48px;
+    font-weight: 700;
+    line-height: 56px;
+    color: #ffffff;
+    font-family: "Poppins", sans-serif;
+}
+#hero h2 {
+  color: #ffffff;
+  margin: 5px 0 30px 0;
+  font-size: 24px;
+  font-weight: 400;
+}
+#hero .container {
+  position: relative;
+}
+#hero h1 span {
+  color: #00d9ff;
+}
+  </style>
+</head>
+
+<body>
+  <!-- ======= Top Bar ======= -->
+  {% include 'header.html' %}
+<br>
+<br>
+<br>
+
+  <!-- ======= Hero Section ======= -->
+  <section id="hero" class="d-flex align-items-center">
+    <div class="container" data-aos="zoom-out" data-aos-delay="100">
+      {% if request.user.is_authenticated %}
+      <h1>Welcome {{user.username}} to <span>TataG</span></h1>
+          {% else %}
+          <h1>Welcome to <span>TataG</span></h1>
+      {% endif %}
+      
+      <h2>We aim to provide you Best Products at affordable prices</h2>
+      <div class="d-flex">
+        <a href="#about" class="btn-get-started scrollto">Get Started</a>
+        <a href="https://www.youtube.com/watch?v=jDDaplaOz7Q" class="glightbox btn-watch-video"><i class="bi bi-play-circle"></i><span>Watch Video</span></a>
+      </div>
+    </div>
+    
+  </section>
+
+  <main id="main">
+
+    
+
+
+
+    <!-- ======= Products Section ======= -->
+    <section id="services" class="services">
+      <div class="container" data-aos="fade-up">
+
+        <div class="section-title">
+          <h2>Products</h2>
+        </div>
+
+        {% for product, range, nslides in allProds %} 
+        <div class="container">
+          <h3 class="my-3 text-center text-success bg-light">
+            {{product.0.category}} FlashSale
+          </h3>
+        </div>
+
+        <div class="container">
+          <div class="row">
+            {% for i in product %} 
+
+              <div class="col-md-3 mt-3">
+                <img src="/media/{{i.image}}" class="card-img-top" alt="....."/>
+
+                <div class="card-body">
+                  <h5 class="card-title" id="namepr{{i.id}}">
+                    {{i.product_name}}
+                  </h5>
+                  <p class="card-text">{{i.desc|slice:"0:25"}}....</p>
+                  <h6 class="card-title">
+                    Price: <span id="pricepr{{i.id}}">₹{{i.price}}</span>
+                  </h6>
+
+
+                  <!-- We need to store the price, product id -->
+                  <!-- HTML code -->
+                  <div class="product_data">
+                    {% csrf_token %}
+                    <input type="hidden" value="{{ i.id }}" class="prod_id"> <!-- Product ID -->
+                    <label for="">Quantity</label>
+                    <div style="margin-bottom: 10px;">
+                      <button class="decrement-btn">-</button>
+                      <input type="text" value="{{product_qnt}}" name="prod_qnt" class="prod_quant" style="width: 20%;"> <!-- Product Quantity with default value 1 -->
+                      <button class="increment-btn">+</button>
+                    </div>
+                  </div>
+                  <span id="divpr{{i.id}}" class="divpr">
+                    <button id="pr{{i.id}}" class="btn btn-success cart btn-sm mt-0 add-to-cart">
+                      Add to Cart
+                    </button>
+                  </span>
+
+                  <a href="/media/{{i.image}}"> 
+                    <button class="btn btn-success btn-sm cart">View</button>
+                  </a>
+
+                </div>
+              </div>
+              {% endfor %}
+          </div>
+        </div>
+        {% endfor %}
+      </div>      
+    </section>
+    
+    <!-- End Products Section -->
+  </main><!-- End #main -->
+
+  <!-- ======= Footer ======= -->
+  {% include 'footer.html' %}
+  
+  <!-- Vendor JS Files -->
+
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="{% static 'assets/vendor/purecounter/purecounter_vanilla.js' %}"></script>
+  <script src="{% static 'assets/vendor/aos/aos.js' %}"></script>
+  <script src="{% static 'assets/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+  <script src="{% static 'assets/vendor/glightbox/js/glightbox.min.js' %}"></script>
+  <script src="{% static 'assets/vendor/isotope-layout/isotope.pkgd.min.js' %}"></script>
+  <script src="{% static 'assets/vendor/swiper/swiper-bundle.min.js' %}"></script>
+  <script src="{% static 'assets/vendor/waypoints/noframework.waypoints.js' %}"></script>
+  <script src="{% static 'assets/vendor/php-email-form/validate.js' %}"></script>
+
+  <!-- Template Main JS File -->
+  <script src="{% static 'assets/js/main.js' %}"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+ <!-- JavaScript code -->
+ <script>
+  // Function to update the quantity when the "+" or "-" buttons are clicked
+  function updateQuantity(btn, increment) {
+    var productData = btn.parentElement;
+    var quantityInput = productData.querySelector('.prod_quant');
+    var currentQuantity = parseInt(quantityInput.value, 10); // Parse the quantity as an integer with radix 10
+    var newQuantity = currentQuantity + increment;
+
+    // Ensure the quantity is not less than 1
+    if (newQuantity < 1) {
+      newQuantity = 1;
+    }
+
+    quantityInput.value = newQuantity;
+  }
+
+  // Function to handle the "-" button click
+  document.querySelectorAll('.decrement-btn').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      updateQuantity(this, -1); // Decrease the quantity by 1
+    });
+  });
+
+  // Function to handle the "+" button click
+  document.querySelectorAll('.increment-btn').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      updateQuantity(this, 1); // Increase the quantity by 1
+    });
+  });
+</script>
+
+</body>
+</html>

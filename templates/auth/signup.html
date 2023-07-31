@@ -1,0 +1,130 @@
+
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign In - GTata</title>
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+</head>
+
+<body class="bg-gray-100">
+    <nav class="bg-primary" style="background-color: #b17755;">
+        <div class="container">
+            <div class="nav-wrapper">
+            <a href="#!" class="brand-logo">GTata</a>
+            <ul class="right">
+                Login
+                <li><a href="/SiteAuth/login/" class="label-icon">
+                    <i class="material-icons">login</i>
+                  </a></li>
+                <!-- <li><a href="/signup">Register</a></li> -->
+            </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="container">
+            <div class="row">
+                <div class="col s12 m6">
+                    <h2 class="lg:text-3xl text-xl font-semibold  mb-6"> SignUp</h2>
+                </div>
+                <div class="col s12 m6">
+                    <style>
+                        h5{
+                            color: red;
+                        }
+                    </style>
+                    {% for message in messages %}
+                        <h5>{{ message }}</h5>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+            <div class="container">
+                <div class="row">
+
+                    {% for message in messages %}
+                        <h5>{{ message }}</h5>
+                    {% endfor %}
+
+                    <form action="/SiteAuth/signup/" method="POST" class="col s12 m10">
+                        {% csrf_token %}   
+                        <div class="row">
+                            <div class="input-field col s12">
+                                    <i class="material-icons prefix">mail</i>
+                                <input id="email" type="email" name="email" placeholder="Email"  class="validate">
+                                <label for="email">Email</label>
+                            </div>
+                        </div>                   
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <i class="material-icons prefix">account_circle</i>
+                            <input name="username" placeholder="Username" type="text" class="validate">
+                            <label for="password">Username</label>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <i class="material-icons prefix">lock_open</i>
+                            <input id="password" type="password" name="password"  placeholder="Password"  class="validate">
+                            <label for="password">Password</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <i class="material-icons prefix">lock</i>
+                            <input id="password" type="password" name="password2" placeholder="Confirm Password"  class="validate">
+                            <label for="password">Confirm Password</label>
+                            </div>
+                        </div>
+                      
+                        <div class="container" >
+
+                            <div class="flex justify-start my-4 space-x-1">
+                                <div class="checkbox">
+                                    <input type="checkbox" id="chekcbox1" style="background-color: black;" checked>
+                                    <label for="chekcbox1"><span class="checkbox-icon"></span> I Agree</label>
+                                </div>
+                                <a href="#"> Terms and Conditions</a>
+                            </div>
+                            <button type="submit" class="btn-small" style="background-color: #477091!important;">click</button>
+                            <div class="text-center mt-5 space-x-2">
+                                <p class="text-base"> Do you have an account? <a href="/SiteAuth/login/"> Login </a></p>
+                              </div>
+                        </div>
+                      
+                    </form>
+                  </div>
+            </div>
+        </div>
+        <footer class="page-footer bg-primary" style="background-color: #b17755;">
+            <div class="container">
+                <div class="flex space-x-2 text-gray-700 uppercase">
+                    <a href="#" style="color: black;"> About</a>
+                    <a href="#" style="color: black;"> Help</a>
+                    <a href="#" style="color: black;"> Terms</a>
+                    <a href="#" style="color: black;"> Privacy</a>
+                </div>
+                <p class="capitalize"> © copyright 2020 by socol</p>
+            </div>
+          </footer>
+
+        <script>    
+            M.AutoInit();
+        </script>        
+<script src="https://code.jquery.com/jquery-3.7.0.min.js" 
+            integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+</body>
+</html>

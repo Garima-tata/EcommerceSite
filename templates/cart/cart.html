@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">PRODUCT</th>
+      <th scope="col">QUANTITY</th>
+      <th scope="col">PRICE</th>
+      <th scope="col"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">
+        <div style="display: flex; flex-direction: row; height: 50px;">
+          <img src="/static/assets/img/apple-touch-icon.png" alt="">&nbsp;&nbsp;&nbsp;&nbsp;
+          <div>
+            <h5 class="mb-1">List group item heading</h5>
+            <p class="mb-1" style="text-decoration:dotted;">Some placeholder content in a paragraph.</p>
+          </div>
+        </div>
+      </th>
+      <td>
+
+        <div class="product_data">
+          {% csrf_token %}
+          <input type="hidden" value="{{ i.id }}" class="prod_id"> <!-- Product ID -->
+          <label for="">Quantity</label>
+          <div style="margin-bottom: 10px;">
+              <button>-</button>
+              <input type="text" value="{{ prod_qnt }}" class="prod_quant"> <!-- Product Quantity -->
+              <button>+</button>
+          </div>
+        </div>
+
+      </td>
+      <td><b>$11500</b></td>
+      <td>
+
+        <button class="btn btn-danger">Remove</button>
+
+      </td>
+    </tr>
+  </tbody>
+</table>
+{% endblock %}
